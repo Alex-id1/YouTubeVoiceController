@@ -1,0 +1,74 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <PlatformTarget>x64</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <!-- Only include English and Russian satellite assemblies - removes de/es/fr/ja/... folders from publish output -->
+    <SatelliteResourceLanguages>en;ru;de</SatelliteResourceLanguages>
+  </PropertyGroup>
+
+  <!-- Encrypted API keys - copied to output on build, excluded from git via .gitignore -->
+  <ItemGroup>
+    <Content Include="api_keys.cfg" Condition="Exists('api_keys.cfg')">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <!-- App icon - copied to output so it can be loaded at runtime -->
+  <ItemGroup>
+    <Content Include="app.ico" Condition="Exists('app.ico')">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="info.ico" Condition="Exists('info.ico')">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="info.ico" Condition="Exists('info.ico')" />
+  </ItemGroup>
+
+  <!-- YOLO models - bundled with the app -->
+  <ItemGroup>
+    <Content Include="Models\YouTubeVoiceCtrl(8tiles_256)n.onnx" Condition="Exists('Models\YouTubeVoiceCtrl(8tiles_256)n.onnx')">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <!-- Speech models - bundled with the app, no user setup required -->
+  <ItemGroup>
+    <Content Include="Models\vosk-model-small-en-us-0.15\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Models\ggml-tiny.en-q5_1.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ML.OnnxRuntime.DirectML" Version="1.20.1" />
+    <PackageReference Include="NAudio" Version="2.2.1" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.7" />
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.4" />
+    <PackageReference Include="Vosk" Version="0.3.38" />
+    <!-- COM interop for Windows UI Automation - used by BrowserTabSwitcher to
+         switch to a background YouTube tab. Managed-only interop, no native bits. -->
+    <PackageReference Include="Interop.UIAutomationClient" Version="10.19041.0" />
+    <PackageReference Include="Whisper.net" Version="1.9.0" />
+    <PackageReference Include="Whisper.net.Runtime" Version="1.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="api_keys.cfg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

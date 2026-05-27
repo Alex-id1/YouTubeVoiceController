@@ -1,0 +1,21 @@
+# Build output
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# API keys - never commit
+api_keys.cfg
+
+# User settings (written to AppData at runtime)
+user_settings.cfg
+
+# Logs
+Logs/
+
+# OS
+Thumbs.db
+desktop.ini
