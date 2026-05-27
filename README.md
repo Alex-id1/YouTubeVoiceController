@@ -41,7 +41,7 @@ Microphone -> Vosk model (keywords) -> CommandDispatcher
                                            |- Whisper model  (free-form search query)
                                            |- Keyboard shortcut  (play/pause/volume/...)
                                            |- YOLO visual click  (like/dislike/skip ad)
-                                           \- YouTube API search  (search + first/second/...)
+                                           |- YouTube API search  (search + first/second/...)
 ```
 
 ---
