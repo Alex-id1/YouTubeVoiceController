@@ -96,7 +96,7 @@ Say **"YouTube"** to activate, then give a command within 15 seconds.
 
 ## Installation
 
-1. Download the latest release (*.exe or *.zip)
+1. Download the [latest release](https://github.com/Alex-id1/YouTubeVoiceController/releases/tag/v1.0.0) (*.exe or *.zip)
 2. Run the installer or extract the archive
 3. Launch YouTube Voice Controller.exe
 4. Click **Start** and say "YouTube" (the app starts listening) => "open" (opens YouTube in your browser if it is not already open)
